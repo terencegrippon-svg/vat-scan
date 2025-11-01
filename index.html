@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VAT‑Scan — EU VAT Number Checker</title>
+  <meta name="description" content="Fast EU VAT number validation with formatted outputs and copy-to-clipboard. Free tool.">
+  <link rel="canonical" href="https://vat-scan.com/">
+  <style>
+    :root { --bg:#0b1220; --card:#111827; --fg:#e5e7eb; --muted:#94a3b8; --pri:#60a5fa; }
+    * { box-sizing:border-box }
+    body { margin:0; font-family: system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif; background:var(--bg); color:var(--fg); }
+    header { padding:24px 16px; display:flex; justify-content:space-between; align-items:center; max-width:1100px; margin:auto; }
+    a { color:var(--pri); text-decoration:none }
+    .wrap { max-width:1100px; margin: 0 auto; padding: 16px; }
+    .hero { display:grid; gap:18px; grid-template-columns:1fr; padding:24px; background:linear-gradient(180deg,#0b1220,#0f172a); border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,.35) }
+    @media(min-width:900px){ .hero { grid-template-columns:1.3fr .7fr } }
+    .card { background:var(--card); border:1px solid #1f2937; border-radius:14px; padding:16px }
+    input,button,select { padding:12px 14px; border-radius:10px; border:1px solid #243445; background:#0b1220; color:var(--fg); }
+    button { background:var(--pri); color:#0b1220; border:0; cursor:pointer; font-weight:600 }
+    .muted { color:var(--muted) }
+    footer { border-top:1px solid #1f2937; margin-top:40px; padding:20px 0; font-size:14px }
+    .grid { display:grid; gap:14px }
+  </style>
+  <!-- Google Consent Mode v2 (default denied) -->
+<script>
+  (function(){
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
+    gtag('consent', 'default', {
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'ad_storage': 'denied',
+      'analytics_storage': 'denied',
+      'functionality_storage': 'granted',
+      'security_storage': 'granted',
+      'personalization_storage': 'denied'
+    });
+    gtag('js', new Date());
+  })();
+</script>
+
+<!-- Auto Ads (loads only after consent granted) -->
+<script>
+  function enableAdsense() {
+    if (window.adsbygoogleInitialized) return;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-REPLACE_WITH_YOUR_ID";
+    s.crossOrigin = "anonymous";
+    document.head.appendChild(s);
+    window.adsbygoogleInitialized = true;
+  }
+</script>
+
+</head>
+<body>
+  <header class="wrap">
+    <strong style="letter-spacing:.5px">VAT‑Scan</strong>
+    <nav style="display:flex;gap:14px">
+      <a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a><a href="/contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="grid">
+        <h1 style="margin:0;font-size:clamp(28px,4vw,40px)">Instant EU VAT Number Validation</h1>
+        <p class="muted">Validate VAT numbers across the EU. Free, fast, and formatted. Copy results in one click.</p>
+        <div class="card grid">
+          <label for="vat">VAT Number</label>
+          <input id="vat" placeholder="e.g., PT123456789" autofocus>
+          <div style="display:flex; gap:10px">
+            <button id="check">Validate</button>
+            <button id="copy" style="background:#a7f3d0">Copy</button>
+          </div>
+          <pre id="out" class="card" style="white-space:pre-wrap; overflow:auto; font-size:14px"></pre>
+          <small class="muted">Note: Public EU VIES service reliability varies by member state.</small>
+        </div>
+      </div>
+      <aside class="card">
+        <h3>Monetization</h3>
+        <p class="muted">This site uses contextual advertising with consent. Ads load only if you accept in the banner.</p>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-REPLACE_WITH_YOUR_ID"
+             data-ad-slot="auto"
+             data-full-width-responsive="true"></ins>
+      </aside>
+    </section>
+
+    <section class="grid" style="margin-top:22px">
+      <h2 style="margin:0 0 6px 0">Why VAT‑Scan?</h2>
+      <ul class="muted">
+        <li>Fast validation with clean formatting</li>
+        <li>Copy-to-clipboard output</li>
+        <li>No login; free to use</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <div>&copy; 2025 VAT‑Scan. All rights reserved.</div>
+  </footer>
+
+  <div id="consent-banner" style="position:fixed;inset:auto 0 0 0;background:#0f172a;color:#e5e7eb;padding:14px;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;z-index:9999;font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
+  <span style="max-width:700px">We use cookies for basic functionality and may serve ads if you agree. You can change your choice anytime on the Privacy page.</span>
+  <div style="display:flex;gap:8px">
+    <button id="consent-accept" style="background:#22c55e;color:#052e16;padding:8px 12px;border:0;border-radius:8px;cursor:pointer">Accept</button>
+    <button id="consent-reject" style="background:#e2e8f0;color:#0f172a;padding:8px 12px;border:0;border-radius:8px;cursor:pointer">Reject</button>
+  </div>
+</div>
+<script>
+  function setConsent(granted) {
+    const m = granted ? 'granted' : 'denied';
+    gtag('consent', 'update', {
+      'ad_user_data': m,
+      'ad_personalization': m,
+      'ad_storage': m,
+      'analytics_storage': m,
+      'personalization_storage': m
+    });
+    if (granted) enableAdsense();
+    localStorage.setItem('vat_scan_consent', granted ? 'yes' : 'no');
+    document.getElementById('consent-banner').style.display='none';
+  }
+  document.getElementById('consent-accept').onclick = () => setConsent(true);
+  document.getElementById('consent-reject').onclick = () => setConsent(false);
+  (function(){
+    const v = localStorage.getItem('vat_scan_consent');
+    if (v === 'yes') { enableAdsense(); document.getElementById('consent-banner').style.display='none'; }
+    if (v === 'no')  { document.getElementById('consent-banner').style.display='none'; }
+  })();
+</script>
+
+  <script>
+    async function validateVAT(v) {
+      const vtrim = v.trim();
+      if (vtrim.length < 4) return 'Enter a VAT number with country code (e.g., PT...).';
+      const country = vtrim.slice(0,2).toUpperCase();
+      const number = vtrim.replace(/\D/g,'').slice(country.length);
+      if (!/^[A-Z]{2}/.test(vtrim)) return 'Include country code, e.g., PT...';
+      // Build VIES REST URL as plain strings to avoid template confusion
+      var url = "https://ec.europa.eu/taxation_customs/vies/rest-api/ms/" + country + "/vat/" + number;
+      try {
+        const r = await fetch(url, { method:'GET' });
+        if (!r.ok) throw new Error('Network');
+        const t = await r.text();
+        return 'VIES response (raw)\n' + t;
+      } catch (e) {
+        return 'Online check fallback. Parsed input: ' + country + ' ' + number + '\nVisit the official VIES site if needed.';
+      }
+    }
+    document.getElementById('check').onclick = async () => {
+      const v = document.getElementById('vat').value;
+      document.getElementById('out').textContent = 'Checking...';
+      const res = await validateVAT(v);
+      document.getElementById('out').textContent = res;
+    };
+    document.getElementById('copy').onclick = async () => {
+      const t = document.getElementById('out').textContent;
+      try { await navigator.clipboard.writeText(t); alert('Copied'); } catch { alert('Copy failed'); }
+    };
+  </script>
+</body>
+</html>
